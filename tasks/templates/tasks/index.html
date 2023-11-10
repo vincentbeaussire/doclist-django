@@ -6,5 +6,15 @@
 </head>
 <body>
     <h1>DocList</h1>
+    {% for collection in collections %}
+        <h2>{{ collection.name }}</h2>
+    {% endfor%}
+
+    <form method="POST" action="{% url 'add-collection' %}">
+        {% csrf_token %}
+
+        <input type="text" name="collection-name">
+        <button type="submit">Ajouter</button>
+    </form>
 </body>
 </html>
