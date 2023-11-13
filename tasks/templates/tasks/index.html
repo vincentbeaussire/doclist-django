@@ -7,7 +7,7 @@
 <body>
     <h1>DocList</h1>
     {% for collection in collections %}
-        <h2>{{ collection.name }}</h2>
+        <h2>{{ collection.name | safe }}</h2>
     {% endfor%}
 
     <form method="POST" action="{% url 'add-collection' %}">
