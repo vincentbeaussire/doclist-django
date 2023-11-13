@@ -12,5 +12,7 @@ def index(request):
 
 def add_collection(request):
     collection_name = escape(request.POST.get("collection-name")) #security
-    Collection.objects.create(name=collection_name)
-    return redirect('home')
+    collection, created = Collection.objects.get_or_create(name=collection_name)
+    if not created:
+        return HttpResponse("La collection existe déjà.", status=409)
+    return HttpResponse(f'<h2>{collection_name}</h2>')
