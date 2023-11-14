@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils.html import escape
 
-from tasks.models import Collection
+from tasks.models import Collection, Task
 
 # Create your views here.
 def index(request):
@@ -18,3 +18,9 @@ def add_collection(request):
     if not created:
         return HttpResponse("La collection existe déjà.", status=409)
     return HttpResponse(f'<h2>{collection_name}</h2>')
+
+def add_task(request):
+    collection = Collection.get_default_collection()
+    description = escape(request.POST.get("task-description"))
+    Task.objects.create(description=description, collection=collection)
+    return HttpResponse(description)
