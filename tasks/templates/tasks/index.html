@@ -34,6 +34,12 @@
         </button>
     </form>
 
+    <div id="tasks">
+        {% for task in taks %}
+        <p>{{ task.description }}</p>
+        {% endfor %}
+    </div>
+
     <!--requête via add_collection-->
     <script>
         document.body.addEventListener("htmx:reponseError", function(evt) {
