@@ -42,7 +42,7 @@
 
     <!--requête via add_collection-->
     <script>
-        document.body.addEventListener("htmx:reponseError", function(evt) {
+        document.body.addEventListener("htmx:responseError", function(evt) {
             alert(evt.detail.xhr.responseText);
         })
     </script>
