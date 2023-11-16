@@ -11,7 +11,8 @@
     <h1>DocList</h1>
 <div id="collections">
     {% for collection in collections %}
-        <h2>{{ collection.name | safe }}</h2>
+        <button hx-get="{% url 'get-tasks' collection.pk %}"
+                hx-target="#tasks">{{ collection.name | safe }}</button>
     {% endfor%}
 </div>
     <form method="POST">
