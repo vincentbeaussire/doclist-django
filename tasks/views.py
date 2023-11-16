@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.template.loader import render_to_string
 from django.utils.html import escape
 from django.utils.text import slugify
 
@@ -35,4 +36,5 @@ def add_task(request):
 def get_tasks(request, collection_pk):
     collection = get_object_or_404(Collection, pk=collection_pk)
     tasks = collection.task_set.order_by("description")
-    return HttpResponse("<br>".join(task.description for task in tasks))
+    #return HttpResponse("<br>".join(task.description for task in tasks))
+    return render(request, 'tasks/tasks.html', context={"tasks": tasks})

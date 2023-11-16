@@ -36,9 +36,7 @@
     </form>
 
     <div id="tasks">
-        {% for task in taks %}
-        <p>{{ task.description }}</p>
-        {% endfor %}
+        {% include 'tasks/tasks.html' with tasks=tasks %}
     </div>
 
     <!--requête via add_collection-->
