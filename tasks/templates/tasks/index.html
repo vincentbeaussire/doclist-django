@@ -26,7 +26,8 @@
     <form method="POST">
         {% csrf_token %}
         <input type="text" name="task-description">
-        <button hx-post="{% url 'add-task' %}"
+        <button onclick="addTask()"
+                hx-post="{% url 'add-task' %}"
                 hx-target="#tasks"
                 hx-vals='js:{"collection": getCollectionFromURL()}'
                 hx-swap="beforeend"
@@ -35,8 +36,8 @@
         </button>
     </form>
 
-    <div id="tasks">
-        {% include 'tasks/tasks.html' with tasks=tasks %}
+    <div>
+        {% include 'tasks/tasks.html' with tasks=tasks collection=collection %}
     </div>
 
     <!--requête via add_collection-->
@@ -44,6 +45,7 @@
         document.body.addEventListener("htmx:responseError", function(evt) {
             alert(evt.detail.xhr.responseText);
         })
+
 
         function getCollectionFromURL() {
             let url = new URL(window.location.href);
